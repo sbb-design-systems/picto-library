@@ -52,6 +52,17 @@ All the objects are build in the same stucture:
 * `name` is a german title for the whole object and is used in the editor as well. 
 
 * `prototype` is a list of the attributes contained in the `content` objects. Each object contains the following attributes: 
+
 ** `name` is the german name of the attribute. 
+
 ** `key` is the name of the attribute inside the `content` list. 
-** `type` defines the type of element. It 
+
+** `type` defines the type of element. It can be: 
+
+*** `text` contains a string. 
+
+*** `number` contains an integer. 
+
+*** `link` links to the `id` of the defines list. 
+
+*** `boolean`
