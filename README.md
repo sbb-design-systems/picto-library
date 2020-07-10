@@ -53,9 +53,9 @@ All the objects are build in the same stucture:
 
 * `prototype` is a list of the attributes contained in the `content` objects. Each object contains the following attributes: 
 
-** `name` is the german name of the attribute. 
+⋅⋅* `name` is the german name of the attribute. 
 
-** `key` is the name of the attribute inside the `content` list. 
+⋅⋅* `key` is the name of the attribute inside the `content` list. 
 
 ** `type` defines the type of element. It can be: 
 
@@ -66,3 +66,5 @@ All the objects are build in the same stucture:
 *** `link` links to the `id` of the defines list. 
 
 *** `boolean`
+
+To be continued...
