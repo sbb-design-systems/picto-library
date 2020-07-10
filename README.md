@@ -72,3 +72,10 @@ All the objects are build in the same stucture:
     pictoLibrary.pictos.content[0].category links to the `id` of the list `category`
     
 * `rel` contains the most commonly used attribute of the linked element, like the german name of the linked element. 
+
+## Language and Directions
+
+Some pictograms exist in different languages or / and different directions. Every moving object is drawn in both directions `moving left` and `moving right`. 
+Usually the `moving right` version must be used. 
+Picotgrams containing text elements are available in the languages `german`, `french` and `italian`. In the future we will also provide `english` versions.
+The language and direction informations are storied in the `svg...` lists with the attributes `isDe`, `isFe`, `isIe`, `isEe`, `isLeft`, `isRight`. 
