@@ -31,7 +31,7 @@ All the meta informations about the pictograms as well as the svg data of the gr
 
 `pictos` `track` `sector` `stand` Those objects contain the meta data of the pictograms itself. 
 `svgPictos` `svgTrack` `svgSector` `svgStand` contains a list of the svg codes once for digital use `svgDigital` and once for way finding purposes `svgProduktion`. 
-`categories` `subcategories` `background` contain informations linked for the pictogram lists. 
+`categories` `subcategories` `background` contain informations linked by the pictogram lists. 
 
 All the objects are build in the same stucture: 
 
@@ -53,18 +53,22 @@ All the objects are build in the same stucture:
 
 * `prototype` is a list of the attributes contained in the `content` objects. Each object contains the following attributes: 
 
-⋅⋅* `name` is the german name of the attribute. 
+  * `name` is the german name of the attribute. 
 
-⋅⋅* `key` is the name of the attribute inside the `content` list. 
+  * `key` is the name of the attribute inside the `content` list. 
 
-** `type` defines the type of element. It can be: 
+  * `type` defines the type of element. It can be: 
 
-*** `text` contains a string. 
+    * `text` contains a string. 
 
-*** `number` contains an integer. 
+    * `number` contains an integer. 
 
-*** `link` links to the `id` of the defines list. 
+    * `link` links to the `id` of the defined list. 
 
-*** `boolean`
+    * `boolean` is stored as 1 and 0. 
 
-To be continued...
+    The linking works as in the following example: 
+
+    pictoLibrary.pictos.content[0].category links to the `id` of the list `category`
+    
+* `rel` contains the most commonly used attribute of the linked element, like the german name of the linked element. 
