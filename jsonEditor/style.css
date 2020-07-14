@@ -1,0 +1,140 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+  outline: none;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  white-space: nowrap;
+  max-width: 40px;
+  overflow: hidden;
+}
+td:hover, th:hover {
+  overflow: visible;
+}
+tr:nth-child(odd) {
+  background-color: #ffffff;
+  transition: 0.4s;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+  transition: 0.4s;
+}
+
+tr:hover {
+  transition: 0.4s;
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+td span {
+  padding: 4px;
+  text-transform: uppercase;
+  background-color: #09aad6;
+  border: #0886a8 solid 1px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 0.7em;
+  margin: 2px;
+}
+.editContainer {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  background-color: rgba(255,255,255,0.9);
+  padding: 20px;
+  border: solid 1px #c4c4c4;
+  border-radius: 20px;
+  overflow: auto;
+}
+.editFrame {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+}
+.inputWrapper {
+  padding: 5px;
+  margin: 10px 5px 20px 5px;
+}
+.inputWrapper label {
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  overflow: visible;
+  font-size: 10px;
+  color: #4c4c4c;
+  padding: 2px 0px 0px 4px;
+  white-space: nowrap;
+}
+.inputWrapper input, .inputWrapper select {
+  font-size: 18px;
+  padding: 12px 5px 2px 10px;
+  color: #4c4c4c;
+  border-radius: 4px;
+  border: none;
+  box-shadow: inset 2px 2px 3px rgba(0,0,0,0.3);
+  width: 300px;
+}
+button {
+  padding: 8px;
+  margin: 4px;
+  background-color: #c4c4c4;
+  color: #ffffff;
+  border: solid 1px #000000;
+  border-radius: 4px;
+  font-size: 15px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  transition: 0.4s;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #09aad6;
+  transition: 0.4s;
+}
+div.checkbox {
+  width: 300px;
+  height: 46px;
+  border-radius: 4px 18px 18px 18px;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.4);
+  position: relative;
+  cursor: pointer;
+}
+div.slider {
+  background-color: #444;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  border-radius: 14px;
+  margin: 4px;
+  left: 0px;
+  border: solid 1px #222;
+  transition: 0.4s;
+  top: 10px;
+}
+div.checkbox[value="1"] .slider {
+  background-color: #17d01f;
+  transition: 0.4s;
+  filter: blur(1px);
+  border-color: #e4ff9a;
+  left: 264px;
+}
+svg {
+  height: 40px;
+}

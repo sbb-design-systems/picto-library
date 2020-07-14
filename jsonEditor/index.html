@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SBB Piktogramm Library Management</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+<input type="file" name="loadJsonButton" id="loadJsonButton" value="x" accept=".json" />
+<input type="file" name="loadSvgProductiveFolder" id="loadSvgProductiveFolder" value="" webkitdirectory directory multiple>
+<input type="file" name="loadSvgDigitalFolder" id="loadSvgDigitalFolder" value="" webkitdirectory directory multiple>
+<button id="saveFileButton">Bibliothek speichern</button>
+<button id="redrawCanvas">Bildschirm aktualisieren</button>
+<button id="exportDesignSystems">CSV für Design Systems exportieren</button>
+<button id="exportSvgEditor">SVG für Editor exportieren</button>
+<button id="exportPictosEditor">Piktogramme für Editor exportieren</button>
+<div id="contentCanvas"></div>
+<script src="mainScript.js" charset="utf-8"></script>
+  </body>
+</html>
