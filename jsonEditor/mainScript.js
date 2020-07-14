@@ -1,15 +1,5 @@
-/*
-DOM IDs:
-- data-id = lib -> Set name
-- data-index = lib -> Set -> Content index
-
-Data types:
-- text
-- number
-- link
-*/
-var lib = {};
-var exports = {
+var lib = {}; //set global var for the library object.
+var exports = { //export elements will be used for csv export. 
   "designsystem": [
     {
       "name": "filename",
@@ -116,17 +106,14 @@ var exports = {
           var svgData;
           var result = "";
           var parser = new DOMParser();
-          lib.svgPictos.content.forEach(el => {
-            if(el.file_name == filename) {
-              svgData = parser.parseFromString(el.svgProduktion, "image/svg+xml");
-              svgData = svgData.getElementById("content");
-              svgData.setAttribute("class", item.class);
-              svgData.removeAttribute("id");
-              result = "\"" + svgData.outerHTML.replace(/\"/g, "\"\"") + "\"";
-              result = result.replace(/>(\n*)</gm, "><");
-              result = result.replace(/(\r\n|\n|\r)/gm,"");
-            }
-          });
+          var picto = find("svgPictos", "file_name", filename);
+          svgData = parser.parseFromString(picto.svgProduktion, "image/svg+xml");
+          svgData = svgData.getElementById("content");
+          svgData.setAttribute("class", item.class);
+          svgData.removeAttribute("id");
+          result = "\"" + svgData.outerHTML.replace(/\"/g, "\"\"") + "\"";
+          result = result.replace(/(\r\n|\n|\r)/gm,"");
+          result = result.replace(/[\s]{1,}/gm, " ");
           return result;
       }
     },
@@ -165,13 +152,7 @@ var exports = {
       "key": "background",
       "type": "generated",
       "get": function(item, i) {
-        var result = "not found";
-        lib.background.content.forEach(el => {
-          if(el.id == item.background) {
-            result = el.class;
-          }
-        });
-        return result;
+        return find("background", "id", item.background).class;
       }
     },
     {
@@ -184,19 +165,14 @@ var exports = {
       "key": "subcategory",
       "type": "generated",
       "get": function(item, i) {
-        var result = "not found";
-        lib.subcategory.content.forEach(el => {
-          if(el.id == item.subcategory) {
-            result = el.dbId;
-          }
-        });
-        return result;
+        return find("subcategory", "id", item.subcategory).dbId;
       }
     }
   ]
 };
-var body = document.getElementsByTagName("BODY")[0];
-var contentCanvas = document.getElementById("contentCanvas");
+var contentCanvas = document.getElementById("contentCanvas"); //initializing the content canvas where the lists will be rendered
+
+//set the event handlers for all the buttens for import, load or export
 document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
 document.getElementById("loadSvgProductiveFolder").addEventListener("change", function (input) {loadSVG(input, "svgProduktion"); }, false);
 document.getElementById("loadSvgDigitalFolder").addEventListener("change", function (input) {loadSVG(input, "svgDigital"); }, false);
@@ -205,7 +181,8 @@ document.getElementById("exportDesignSystems").addEventListener("click", functio
 document.getElementById("exportSvgEditor").addEventListener("click", function() {exportSVGEditor(exports.svgDatabase, "PICTO_SVGS.csv", "pictos", ["picto"]);}, false);
 document.getElementById("exportPictosEditor").addEventListener("click", function() {exportPictosEditor(exports.pictoDatabase, "PICTOS.csv", ["pictos"], ["picto", "generated"]);}, false);
 document.getElementById("redrawCanvas").addEventListener("click", function() {buildViewPort();}, false);
-function loadJsonFile() {
+
+function loadJsonFile() { //Load the initial json library from the file system
   var jsonFile = this.files[0];
   const reader = new FileReader;
   reader.addEventListener('load', (event) => {
@@ -216,7 +193,7 @@ function loadJsonFile() {
   reader.readAsText(jsonFile);
 }
 
-function buildViewPort() {
+function buildViewPort() { //Sort library and generate the list containers with headers and "add" button in the DOM
   sort();
   contentCanvas.innerHTML = "";
   var tables = Object.entries(lib);
@@ -240,7 +217,7 @@ function buildViewPort() {
   });
 }
 
-function jsonToTable(container, dataSet) {
+function jsonToTable(container, dataSet) { //create a html table from a json list
   var table = document.createElement("TABLE");
   table.appendChild(createHeader(lib[dataSet].prototype, document.createElement("TR")));
   lib[dataSet].content.forEach((item, i) => {
@@ -254,7 +231,7 @@ function jsonToTable(container, dataSet) {
   container.appendChild(table);
 }
 
-function loadSVG(input, dataKey) {
+function loadSVG(input, dataKey) { //load choosen svg files, read them and write them in the library. If an old graphic already exist, it overwrites this one.
   var svgFiles = Array.from(input.target.files);
   var parser = new DOMParser();
   svgFiles.forEach(file => {
@@ -300,7 +277,7 @@ function loadSVG(input, dataKey) {
   });
 }
 
-function setEntry(dataSet, index) {
+function setEntry(dataSet, index) { //build the edit, delete, save functions and edit overlays on doubleclick.
   var editFrame = document.createElement("DIV");
   editFrame.classList.add("editFrame");
   editFrame.setAttribute("id", "editFrame");
@@ -409,12 +386,12 @@ function setEntry(dataSet, index) {
   editContainer.appendChild(saveButton);
   editContainer.appendChild(deleteButton);
   editFrame.appendChild(editContainer);
-  body.appendChild(editFrame);
+  document.body.appendChild(editFrame);
 }
 
-function saveFile(text, filename) {
+function saveFile(text, filename) { //function to save "download in this case" the choosen export or the library itself
   var d = new Date();
-  filename = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + "_" + d.getHours() + "." + d.getMinutes() + "_" + filename;
+  filename = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + "_" + d.getHours() + "." + d.getMinutes() + "_" + filename;
   var element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
   element.setAttribute('download', filename);
@@ -424,19 +401,14 @@ function saveFile(text, filename) {
   document.body.removeChild(element);
 }
 
-function getLink(element, target) {
+function getLink(element, target) { //get the information of a linked attribute
   var result = {};
   result.html = document.createElement("SPAN");
-  lib[element[0]].content.forEach((item, i) => {
-    if(item.id == element[1]) {
-      result.html.innerHTML = item[target];
-      result.string = item[target];
-    }
-  });
+  result.html.innerHTML = result.string = find(element[0], "id", element[1])[target];
   return result;
 }
 
-function createHeader(prototype, bodyRow) {
+function createHeader(prototype, bodyRow) { //create table header
   prototype.forEach((item, i) => {
     var cell = document.createElement("TH");
     cell.innerHTML = item.name;
@@ -445,7 +417,7 @@ function createHeader(prototype, bodyRow) {
   return bodyRow;
 }
 
-function createRow(dataSet, index, bodyRow) {
+function createRow(dataSet, index, bodyRow) { //create a body row
   var prototype = lib[dataSet].prototype;
   prototype.forEach((item, i) => {
     var cell = document.createElement("TD");
@@ -463,7 +435,7 @@ function createRow(dataSet, index, bodyRow) {
   return bodyRow;
 }
 
-function sort() {
+function sort() { //sort the library. The sorting attributes are stored in each table lib[tablename].sort
   libKeys = Object.keys(lib);
   libKeys.forEach((item) => {
     lib[item].content.sort((a, b) => {
@@ -479,7 +451,7 @@ function sort() {
 
 }
 
-function createExportHeader(header, separator) {
+function createExportHeader(header, separator) { //creating header line for csv exports
   var csvString = "";
   header.forEach((item, index) => {
     csvString += item.name;
@@ -489,7 +461,7 @@ function createExportHeader(header, separator) {
   return csvString;
 }
 
-function exportDesignSystems(header, filename, target, types) {
+function exportDesignSystems(header, filename, target, types) { //csv export for design systems
   var csvString = "";
   csvString += createExportHeader(header, ";");
   var lists = [];
@@ -528,7 +500,7 @@ function exportDesignSystems(header, filename, target, types) {
   saveFile(csvString, filename);
 }
 
-function exportPictosEditor(header, filename, target, types) {
+function exportPictosEditor(header, filename, target, types) { //csv export for signaletik Editor db -> issues.sbb.ch/projects/SEE
   var csvString = "";
   csvString += createExportHeader(header, ";");
   var lists = [];
@@ -548,11 +520,7 @@ function exportPictosEditor(header, filename, target, types) {
         }
         else if(key.type == "link")
         {
-          lib[key.key].content.forEach((link) => {
-            if(link.id == item[key.key]) {
-              csvString += link.name;
-            }
-          });
+          csvString += find(key.key, "id", item[key.key]).name;
         }
         else {
           csvString += item[key.key];
@@ -565,7 +533,7 @@ function exportPictosEditor(header, filename, target, types) {
   saveFile(csvString, filename);
 }
 
-function exportSVGEditor(header, filename, target) {
+function exportSVGEditor(header, filename, target) { //csv export containing the svg graphics for signaletik Editor db -> issues.sbb.ch/projects/SEE
   var lang = ["de", "fr", "it"];
   var dir = ["l", "r"];
   var csvString = "";
@@ -603,7 +571,7 @@ function exportSVGEditor(header, filename, target) {
   saveFile(csvString, filename);
 }
 
-function createLine(item, header, id = false, lang = false, dir = false) {
+function createLine(item, header, id = false, lang = false, dir = false) { //creating a line for a csv export.
   var lineString = "";
   header.forEach((key, index) => {
     if(key.type == "generated") {
@@ -611,11 +579,7 @@ function createLine(item, header, id = false, lang = false, dir = false) {
     }
     else if(key.type == "link")
     {
-      lib[key.key].content.forEach((link) => {
-        if(link.id == item[key.key]) {
-          lineString += link.name;
-        }
-      });
+      lineString += find(key.key, "id", item[key.key]).name;
     }
     else {
       lineString += item[key.key];
@@ -626,7 +590,7 @@ function createLine(item, header, id = false, lang = false, dir = false) {
   return lineString;
 }
 
-function find(list, attribute, value) {
+function find(list, attribute, value) { //search in the library in a given list for a value in a given attribute
   var result = false;
   lib[list].content.forEach((item, index) => {
     if(item[attribute] == value) {
