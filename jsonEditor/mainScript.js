@@ -1,5 +1,5 @@
 var lib = {}; //set global var for the library object.
-var exports = { //export elements will be used for csv export. 
+var exports = { //export elements will be used for csv export.
   "designsystem": [
     {
       "name": "filename",
@@ -174,8 +174,11 @@ var contentCanvas = document.getElementById("contentCanvas"); //initializing the
 
 //set the event handlers for all the buttens for import, load or export
 document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
+document.getElementById("loadJsonButtonTrigger").addEventListener("click", function() {document.getElementById("loadJsonButton").click();}, false);
 document.getElementById("loadSvgProductiveFolder").addEventListener("change", function (input) {loadSVG(input, "svgProduktion"); }, false);
+document.getElementById("loadSvgProductiveFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgProductiveFolder").click();}, false);
 document.getElementById("loadSvgDigitalFolder").addEventListener("change", function (input) {loadSVG(input, "svgDigital"); }, false);
+document.getElementById("loadSvgDigitalFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgDigitalFolder").click();}, false);
 document.getElementById("saveFileButton").addEventListener("click", function () {saveFile(JSON.stringify(lib), "Piktogramm-Bibliothek.json");}, false);
 document.getElementById("exportDesignSystems").addEventListener("click", function() {exportDesignSystems(exports.designsystem, "pikto.csv", ["svgPictos", "svgTrack", "svgSector", "svgStand"], ["picto", "addon"]);}, false);
 document.getElementById("exportSvgEditor").addEventListener("click", function() {exportSVGEditor(exports.svgDatabase, "PICTO_SVGS.csv", "pictos", ["picto"]);}, false);
@@ -282,14 +285,33 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
   editFrame.classList.add("editFrame");
   editFrame.setAttribute("id", "editFrame");
   editFrame.addEventListener("click", function() {document.getElementById("editFrame").remove();}, false);
+  document.body.appendChild(editFrame);
+
+  var editHeader = document.createElement("DIV");
+  editHeader.classList.add("editHeader");
+  editHeader.innerHTML = "<span class'closeButton'>x</span>";
+  editFrame.appendChild(editHeader);
+
+  var closeIcon = document.createElement("SPAN");
+  closeIcon.innerHTML = "x";
+  closeIcon.classList.add("closeButton");
+  closeIcon.addEventListener("click", function(e) {document.getElementById("editFrame").remove(); e.stopPropagation();}, false);
+
   var editContainer = document.createElement("DIV");
   editContainer.classList.add("editContainer");
   editContainer.setAttribute("id", "editContainer");
   editContainer.setAttribute("data-id", dataSet);
   editContainer.setAttribute("data-index", index);
   editContainer.addEventListener("click", function(e) {e.stopPropagation();}, false);
+  editFrame.appendChild(editContainer);
+
+  var editFooter = document.createElement("DIV");
+  editFooter.classList.add("editFooter");
+  editFrame.appendChild(editFooter);
+
   var saveButton = document.createElement("BUTTON");
   saveButton.innerHTML = "Speichern";
+  saveButton.classList.add("red");
   saveButton.setAttribute("data-id", dataSet);
   saveButton.setAttribute("data-index", index);
   saveButton.setAttribute("container-id", lib[dataSet].id);
@@ -298,11 +320,11 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     var element = {};
     lib[this.getAttribute("data-id")].prototype.forEach((item, i) => {
       var domElement = document.getElementById("dataid" + item.key);
-      if(domElement.tagName == "INPUT" || domElement.tagName == "SELECT") {
-        element[item.key] = domElement.value;
+      if(domElement.type == "checkbox") {
+        element[item.key] = domElement.checked === true ? 1 : 0;
       }
-      else if(domElement.tagName == "DIV") {
-        element[item.key] = domElement.getAttribute("value");
+      else {
+        element[item.key] = domElement.value;
       }
     });
     if(index != "new") {
@@ -316,10 +338,15 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     jsonToTable(container, this.getAttribute("data-id"));
     document.getElementById("editFrame").remove();
   }, false);
+  editFooter.appendChild(saveButton);
+
   var abortButton = document.createElement("BUTTON");
   abortButton.innerHTML = "Abbrechen";
   abortButton.addEventListener("click", function(e) {document.getElementById("editFrame").remove(); e.stopPropagation();}, false);
+  editFooter.appendChild(abortButton);
+
   var deleteButton = document.createElement("BUTTON");
+  deleteButton.classList.add("right");
   deleteButton.innerHTML = "Löschen";
   deleteButton.setAttribute("data-id", dataSet);
   deleteButton.setAttribute("data-index", index);
@@ -332,8 +359,12 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     jsonToTable(container, this.getAttribute("data-id"));
     document.getElementById("editFrame").remove();
   }, false);
+  editFooter.appendChild(deleteButton);
+
   var editContent = document.createElement("DIV");
   editContent.setAttribute("id", "editContent");
+  editContainer.appendChild(editContent);
+
   var dataPrototype = lib[dataSet].prototype;
   dataPrototype.forEach((item, i) => {
     var inputWrapper = document.createElement("DIV");
@@ -349,15 +380,13 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
       }
     }
     else if(item.type == "boolean") {
-      var input = document.createElement("DIV");
-      input.classList.add("checkbox");
-      var slider = document.createElement("DIV");
-      slider.classList.add("slider");
-      input.appendChild(slider);
-      input.setAttribute("value", (index != "new") ? lib[dataSet].content[index][item.key] : "0");
-      input.addEventListener("click", function() {
+      var input = document.createElement("INPUT");
+      input.type = "checkbox";
+      if(index != "new") input.checked = lib[dataSet].content[index][item.key] == 1 ? true : false;
+      //input.setAttribute("value", (index != "new") ? lib[dataSet].content[index][item.key] : "0");
+      /*input.addEventListener("click", function() {
         this.setAttribute("value", (this.getAttribute("value") == "1") ? "0" : "1");
-      }, false);
+      }, false);*/
     }
     else if(item.type == "link") {
       var input = document.createElement("SELECT");
@@ -381,12 +410,6 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     inputWrapper.appendChild(input);
     editContent.appendChild(inputWrapper);
   });
-  editContainer.appendChild(editContent);
-  editContainer.appendChild(abortButton);
-  editContainer.appendChild(saveButton);
-  editContainer.appendChild(deleteButton);
-  editFrame.appendChild(editContainer);
-  document.body.appendChild(editFrame);
 }
 
 function saveFile(text, filename) { //function to save "download in this case" the choosen export or the library itself

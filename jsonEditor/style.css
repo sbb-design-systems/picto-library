@@ -1,6 +1,38 @@
+@font-face {
+  font-family: "SBBWeb Roman";
+  src: url(https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman.woff2);
+}
+@font-face {
+  font-family: "SBBWeb Thin";
+  src: url(https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Thin.woff2);
+}
+@font-face {
+  font-family: "SBBWeb Bold";
+  src: url(https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold.woff2);
+}
 * {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "SBBWeb Roman", Helvetica, Arial, sans-serif;
   outline: none;
+  padding: 0px;
+  margin: 0px;
+  -webkit-font-smoothing: antialiased;
+}
+#header {
+  height: 48px;
+  background-color: #ffffff;
+  border-bottom: solid 1px #cccccc;
+  width: 100%;
+  position: fixed;
+}
+.mod_header_logo_content {
+  float: right;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 12px;
+  margin-top: 8px;
+  width: 190px;
 }
 table {
   border-collapse: collapse;
@@ -11,18 +43,19 @@ td, th {
   border: 1px solid #ddd;
   padding: 8px;
   white-space: nowrap;
-  max-width: 40px;
   overflow: hidden;
+  font-size: 15px;
+  font-family: "SBBWeb Roman";
 }
 td:hover, th:hover {
   overflow: visible;
 }
 tr:nth-child(odd) {
-  background-color: #ffffff;
+  background-color: #F6F6F6;
   transition: 0.4s;
 }
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   transition: 0.4s;
 }
 
@@ -35,29 +68,32 @@ th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #e5e5e5;
+  color: #000000;
+  font-family: "SBBWeb Bold";
+  font-size: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 td span {
-  padding: 4px;
-  text-transform: uppercase;
-  background-color: #09aad6;
-  border: #0886a8 solid 1px;
-  border-radius: 4px;
-  color: #ffffff;
-  font-size: 0.7em;
-  margin: 2px;
+  height: 34px;
+  line-height: 34px;
+  font-size: 15px;
+  color: #000000;
+  border: solid 1px #000000;
+  border-radius: 18px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: #ffffff;
+  font-family: "SBBWeb Roman";
 }
 .editContainer {
   position: fixed;
-  top: 50px;
-  left: 50px;
-  right: 50px;
-  bottom: 50px;
-  background-color: rgba(255,255,255,0.9);
+  top: 65px;
+  left: 0px;
+  right: 0px;
+  bottom: 96px;
   padding: 20px;
-  border: solid 1px #c4c4c4;
-  border-radius: 20px;
   overflow: auto;
 }
 .editFrame {
@@ -66,47 +102,111 @@ td span {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background-color: rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
+  background-color: #ffffff;
+}
+.editHeader {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 64px;
+  border-bottom: solid 1px #e5e5e5;
+}
+.editHeader span {
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 14px;
+  border: solid 2px #686868;
+  position: relative;
+  display: inline-block;
+  color: #686868;
+  float: right;
+  margin: 18px;
+  cursor: pointer;
+}
+.editHeader span:hover {
+  color: #C60018;
+  border-color: #C60018;
+}
+.editFooter {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 96px;
+  border-top: solid 1px #e5e5e5;
 }
 .inputWrapper {
-  padding: 5px;
-  margin: 10px 5px 20px 5px;
+  margin: 10px 10px 20px 10px;
 }
 .inputWrapper label {
   width: 0px;
-  height: 0px;
-  position: absolute;
   overflow: visible;
-  font-size: 10px;
-  color: #4c4c4c;
-  padding: 2px 0px 0px 4px;
+  font-size: 13px;
+  color: #666666;
   white-space: nowrap;
+  display: block;
+  margin: 10px 10px 5px 10px;
+  font-family: "SBBWeb Roman";
 }
 .inputWrapper input, .inputWrapper select {
-  font-size: 18px;
-  padding: 12px 5px 2px 10px;
-  color: #4c4c4c;
-  border-radius: 4px;
-  border: none;
-  box-shadow: inset 2px 2px 3px rgba(0,0,0,0.3);
-  width: 300px;
+  font-size: 15px;
+  padding: 12px 16px 13px 16px;
+  color: #666666;
+  border-radius: 2px;
+  border: solid 2px #B7B7B7;
+  width: 320px;
+  font-family: "SBBWeb Roman";
+  box-sizing: border-box;
+}
+.inputWrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 5px 10px 10px 10px;
 }
 button {
-  padding: 8px;
-  margin: 4px;
-  background-color: #c4c4c4;
-  color: #ffffff;
-  border: solid 1px #000000;
-  border-radius: 4px;
+  padding: 12px 40px 12px 40px;
+  margin: 6px;
+  background-color: #dcdcdc;
+  color: #444444;
+  line-height: 19px;
+  border-radius: 2px;
   font-size: 15px;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   transition: 0.4s;
   cursor: pointer;
+  border: none;
+  font-family: "SBBWeb Roman";
+  margin-top: 28px;
 }
 button:hover {
-  background-color: #09aad6;
+  background-color: #cdcdcd;
   transition: 0.4s;
+}
+button.right {
+  float: right;
+}
+button.red {
+  background-color: #eb0000;
+  color: #ffffff;
+}
+button.red:hover{
+  background-color: #C60018;
+  color: #ffffff;
+}
+#header button {
+  margin: 3px 24px 3px 24px;
+  font-size: 14px;
+  color: #767676;
+  font-family: "SBBWeb Roman";
+  background: none;
+  padding: 0px;
+  line-height: 48px;
+}
+#header button:hover {
+  color: #C60018;
+  text-decoration: underline;
 }
 div.checkbox {
   width: 300px;
@@ -137,4 +237,15 @@ div.checkbox[value="1"] .slider {
 }
 svg {
   height: 40px;
+}
+#contentCanvas {
+  padding-top: 48px;
+}
+h1 {
+  color: #000000;
+  line-height: 48px;
+  font-size: 40px;
+  font-family: "SBBWeb Thin";
+  padding: 86px 10px 48px 10px;
+  font-weight: 400;
 }
