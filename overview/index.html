@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      @font-face {
+        font-family: "SBBWeb Bold";
+        src: url(https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold.woff2);
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+        outline: none;
+        color: #ffffff;
+        font-family: "SBBWeb Bold";
+        -webkit-font-smoothing: antialiased;
+
+      }
+      body {
+        background-color: rgb(45,50,125);
+        padding: 10mm 10mm 10mm 20mm;
+      }
+      .category {
+        width: 100mm;
+        display: inline-block;
+        float: left;
+        margin-right: 40mm;
+      }
+      .subcategory {
+        margin-bottom: 10mm;
+        float: left;
+      }
+      h1 {
+        width: 100mm;
+        font-size: 18pt;
+        height: 10mm;
+        margin-left: -10mm;
+      }
+      h2 {
+        width: 100mm;
+        font-size: 12pt;
+      }
+      svg {
+        height: 20mm;
+        float: left;
+      }
+
+    </style>
+  </head>
+  <body>
+    <input type="file" name="loadJsonButton" id="loadJsonButton" value="x" accept=".json" />
+    <script type="text/javascript">
+      var lib, lists;
+      //var PictoType = "svgProduktion";
+      var PictoType = "svgDigital";
+      var Lang = "isDe";
+      var TitleLang = "name_de";
+      document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
+      function loadJsonFile() { //Load the initial json library from the file system
+        var jsonFile = this.files[0];
+        const reader = new FileReader;
+        reader.addEventListener('load', (event) => {
+          lib = JSON.parse(event.target.result);
+          document.getElementById("loadJsonButton").style.display = "none";
+          lists = renderView();
+        });
+        reader.readAsText(jsonFile);
+      }
+
+      function find(list, attribute, value) { //search in the library in a given list for a value in a given attribute
+        var result = [];
+        lib[list].content.forEach((item, index) => {
+          if(item[attribute] == value) {
+            result.push(item);
+          }
+        });
+        return result;
+      }
+
+      function renderView() {
+        var list = [];
+        lib.pictos.content.forEach((item, index) => {
+          if(item.active == 1 && ["picto", "addon"].includes(item.type)) {
+            list.push({picto: item, svgs: find("svgPictos", "pictos", item.id)});
+          }
+        });
+        lib.track.content.forEach((item, index) => {
+          list.push({picto: item, svgs: find("svgTrack", "track", item.id)});
+        });
+        lib.sector.content.forEach((item, index) => {
+          list.push({picto: item, svgs: find("svgSector", "sector", item.id)});
+        });
+        lib.stand.content.forEach((item, index) => {
+          list.push({picto: item, svgs: find("svgStand", "stand", item.id)});
+        });
+        list.sort((a, b) => {
+          if(a.picto.category == b.picto.category) {
+            if(a.picto.subcategory == b.picto.subcategory) {
+              return a.picto.order - b.picto.order;
+            }
+            else return a.picto.subcategory - b.picto.subcategory;
+          }
+          else return a.picto.category - b.picto.category;
+        });
+        var catContainer, subcatContainer;
+        list.forEach((item, index) => {
+          if(index == 0 || item.picto.category != list[index -1].picto.category) {
+            catContainer = document.createElement("DIV");
+            catContainer.classList.add("category");
+            document.body.appendChild(catContainer);
+            var catTitle = document.createElement("H1");
+            catTitle.innerHTML = item.picto.category + ". " + find("category", "id", item.picto.category)[0][TitleLang] + ". ";
+            catContainer.appendChild(catTitle);
+          }
+          if(index == 0 || item.picto.subcategory != list[index -1].picto.subcategory) {
+            subcatContainer = document.createElement("DIV");
+            subcatContainer.classList.add("subcategory");
+            catContainer.appendChild(subcatContainer);
+            var subcatTitle = document.createElement("H2");
+            subcatTitle.innerHTML = item.picto.category + ". " + find("subcategory", "id", item.picto.subcategory)[0].indexId + ". " + find("subcategory", "id", item.picto.subcategory)[0][TitleLang] + ". ";
+            subcatContainer.appendChild(subcatTitle);
+          }
+          var svg;
+          item.svgs.forEach(i => {
+            if(i[Lang] == 1 && (i.isRight == 1 || i.isSmall == 1)) {
+              svg = i;
+            }
+          });
+          try {
+            subcatContainer.innerHTML += svg[PictoType];
+          }
+          catch (e) {
+
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
