@@ -51,11 +51,26 @@
   <body>
     <input type="file" name="loadJsonButton" id="loadJsonButton" value="x" accept=".json" />
     <script type="text/javascript">
-      var lib, lists;
-      //var PictoType = "svgProduktion";
-      var PictoType = "svgDigital";
       var Lang = "isDe";
       var TitleLang = "name_de";
+      var url = new URL(window.location.href);
+      var lang = url.searchParams.get("lang");
+      switch(lang) {
+        case "de":
+          Lang = "isDe";
+          TitleLang = "name_de";
+          break;
+        case "fr":
+          Lang = "isFr";
+          TitleLang = "name_fr";
+          break;
+        case "it":
+          Lang = "isIt";
+          TitleLang = "name_it";
+          break;
+      }
+      var lib, lists;
+      var PictoType = "svgProduktion";
       document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
       function loadJsonFile() { //Load the initial json library from the file system
         var jsonFile = this.files[0];

@@ -323,6 +323,13 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
       if(domElement.type == "checkbox") {
         element[item.key] = domElement.checked === true ? 1 : 0;
       }
+      else if(domElement.type == "select-multiple") {
+        var values = [];
+        for(var i = 0; i < domElement.selectedOptions.length; i++) {
+          values.push(Number(domElement.selectedOptions[i].value));
+        }
+        element[item.key] = values;
+      }
       else {
         element[item.key] = domElement.value;
       }
@@ -383,10 +390,6 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
       var input = document.createElement("INPUT");
       input.type = "checkbox";
       if(index != "new") input.checked = lib[dataSet].content[index][item.key] == 1 ? true : false;
-      //input.setAttribute("value", (index != "new") ? lib[dataSet].content[index][item.key] : "0");
-      /*input.addEventListener("click", function() {
-        this.setAttribute("value", (this.getAttribute("value") == "1") ? "0" : "1");
-      }, false);*/
     }
     else if(item.type == "link") {
       var input = document.createElement("SELECT");
@@ -396,8 +399,23 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
         option.value = opt.id;
         option.innerHTML = opt[item.rel];
         if(index != "new") {
-          if(opt.id == lib[dataSet].content[index][item.key])
-          {
+          if(opt.id == lib[dataSet].content[index][item.key]) {
+            option.selected = true;
+          }
+        }
+        input.appendChild(option);
+      });
+    }
+    else if(item.type == "multiLink") {
+      var input = document.createElement("SELECT");
+      input.multiple = true;
+      var options = lib[item.key].content;
+      options.forEach((opt, i) => {
+        var option = document.createElement("OPTION");
+        option.value = opt.id;
+        option.innerHTML = opt[item.rel];
+        if(index != "new") {
+          if(lib[dataSet].content[index][item.key].includes(Number(opt.id)) === true) {
             option.selected = true;
           }
         }
@@ -450,6 +468,11 @@ function createRow(dataSet, index, bodyRow) { //create a body row
     else if(item.type == "link") {
       cell.appendChild(getLink([item.key, lib[dataSet].content[index][item.key]], item.rel).html);
     }
+    else if(item.type == "multiLink") {
+      lib[dataSet].content[index][item.key].forEach((linkItem, linkIndex) => {
+        cell.appendChild(getLink([item.key, lib[dataSet].content[index][item.key][linkIndex]], item.rel).html);
+      });
+    }
     else if(item.type == "boolean") {
       cell.innerHTML = lib[dataSet].content[index][item.key];
     }
@@ -496,10 +519,17 @@ function exportDesignSystems(header, filename, target, types) { //csv export for
     });
   });
   lists.sort((a, b) => {
-    if(a.id < b.id) return -1;
-    else if(a.id > b.id) return 1;
+    var pictoA = find("pictos", "id", a.pictos) || find("track", "id", a.track) || find("sector", "id", a.sector) || find("stand", "id", a.stand);
+    var pictoB = find("pictos", "id", b.pictos) || find("track", "id", b.track) || find("sector", "id", b.sector) || find("stand", "id", b.stand);
+    if(Number(pictoA.category) < Number(pictoB.category)) return -1;
+    else if(Number(pictoA.category) > Number(pictoB.category)) return 1;
+    else if(Number(pictoA.subcategory) < Number(pictoB.subcategory)) return -1;
+    else if(Number(pictoA.subcategory) > Number(pictoB.subcategory)) return 1;
+    else if(Number(pictoA.order) < Number(pictoB.order)) return -1;
+    else if(Number(pictoA.order) > Number(pictoB.order)) return 1;
     else return 0;
   });
+  console.log(lists);
   lists.forEach((item, i) => {
       header.forEach((key, index) => {
         if(key.type == "generated") {
