@@ -198,6 +198,19 @@ function loadJsonFile() { //Load the initial json library from the file system
 
 function buildViewPort() { //Sort library and generate the list containers with headers and "add" button in the DOM
   sort();
+  /*cleanBoolean("background");
+  cleanBoolean("category");
+  cleanBoolean("pictos");
+  cleanBoolean("plateType");
+  cleanBoolean("sector");
+  cleanBoolean("stand");
+  cleanBoolean("subcategory");
+  cleanBoolean("svgPictos");
+  cleanBoolean("svgSector");
+  cleanBoolean("svgStand");
+  cleanBoolean("svgTrack");
+  cleanBoolean("track");*/
+
   contentCanvas.innerHTML = "";
   var tables = Object.entries(lib);
   tables.forEach((item) => {
@@ -321,7 +334,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     lib[this.getAttribute("data-id")].prototype.forEach((item, i) => {
       var domElement = document.getElementById("dataid" + item.key);
       if(domElement.type == "checkbox") {
-        element[item.key] = domElement.checked === true ? 1 : 0;
+        element[item.key] = domElement.checked;
       }
       else if(domElement.type == "select-multiple") {
         var values = [];
@@ -329,6 +342,9 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
           values.push(Number(domElement.selectedOptions[i].value));
         }
         element[item.key] = values;
+      }
+      else if(item.type == "number") {
+        element[item.key] = parseInt(domElement.value);
       }
       else {
         element[item.key] = domElement.value;
@@ -389,7 +405,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     else if(item.type == "boolean") {
       var input = document.createElement("INPUT");
       input.type = "checkbox";
-      if(index != "new") input.checked = lib[dataSet].content[index][item.key] == 1 ? true : false;
+      if(index != "new") input.checked = lib[dataSet].content[index][item.key];
     }
     else if(item.type == "link") {
       var input = document.createElement("SELECT");
@@ -651,4 +667,19 @@ function find(list, attribute, value) { //search in the library in a given list 
     }
   });
   return result;
+}
+
+function cleanBoolean (list) {
+  lib[list].prototype.forEach((item, index) => {
+    if(item.type == "boolean") {
+      lib[list].content.forEach(i => {
+        i[item.key] = i[item.key] == 1 ? true : false;
+      });
+    }
+    else if(item.type == "number" || item.type == "link") {
+      lib[list].content.forEach(i => {
+        i[item.key] = parseInt(i[item.key]);
+      });
+    }
+  });
 }
