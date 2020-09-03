@@ -343,7 +343,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
         }
         element[item.key] = values;
       }
-      else if(item.type == "number") {
+      else if(item.type == "number" || item.type == "link") {
         element[item.key] = parseInt(domElement.value);
       }
       else {
