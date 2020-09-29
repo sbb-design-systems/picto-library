@@ -438,6 +438,47 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
         input.appendChild(option);
       });
     }
+    else if(item.type == "svg") {
+      var input = document.createElement("INPUT");
+      input.type = "hidden";
+      if(index != "new") {
+        input.value = lib[dataSet].content[index][item.key];
+      }
+      var newFileInput = document.createElement("INPUT");
+      newFileInput.type = "file";
+      newFileInput.accept="image/svg+xml";
+      newFileInput.style.display = "none";
+      newFileInput.addEventListener("change", function(newSvgFile) {
+        var parser = new DOMParser();
+        const reader = new FileReader;
+        var file = newSvgFile.target.files[0];
+        reader.originalFileName = file.name.replace(".svg", "");
+        reader.addEventListener('load', (event) => {
+          var data = parser.parseFromString(event.target.result, "image/svg+xml");
+          if(data.getElementById("content_1_") != null) {
+            data.getElementById("content_1_").id = "content";
+          }
+          if(data.getElementById("Content") != null) {
+            data.getElementById("Content").id = "content";
+          }
+        svgPreview.innerHTML = data.documentElement.outerHTML;
+        input.value = data.documentElement.outerHTML;
+        });
+        if(file.name.indexOf(".svg") != -1) {
+          reader.readAsText(file);
+        }
+      });
+      var svgPreview = document.createElement("DIV");
+      svgPreview.classList.add("svgPreview");
+      if(index != "new") {
+        svgPreview.innerHTML = lib[dataSet].content[index][item.key];
+      }
+      svgPreview.addEventListener("click", function(e) {
+        newFileInput.click();
+      });
+      inputWrapper.appendChild(svgPreview);
+      inputWrapper.appendChild(newFileInput);
+    }
     input.setAttribute("data-id", item.key);
     input.id = "dataid" + item.key;
     input.classList.add("dataItem");
@@ -478,7 +519,7 @@ function createRow(dataSet, index, bodyRow) { //create a body row
   var prototype = lib[dataSet].prototype;
   prototype.forEach((item, i) => {
     var cell = document.createElement("TD");
-    if(item.type == "text" || item.type == "number") {
+    if(item.type == "text" || item.type == "number" || item.type == "svg") {
       cell.innerHTML = lib[dataSet].content[index][item.key];
     }
     else if(item.type == "link") {

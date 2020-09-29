@@ -70,7 +70,17 @@
           break;
       }
       var lib, lists;
-      var PictoType = "svgProduktion";
+      var type = url.searchParams.get("type");
+      switch(type){
+        case "digital":
+          PictoType = "svgDigital";
+          break;
+        case "production":
+          PictoType = "svgProduktion";
+          break;
+        default:
+          PictoType = "svgProduktion";
+      }
       document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
       function loadJsonFile() { //Load the initial json library from the file system
         var jsonFile = this.files[0];
@@ -138,7 +148,7 @@
           }
           var svg;
           item.svgs.forEach(i => {
-            if(i[Lang] == 1 && (i.isRight == 1 || i.isSmall == 1)) {
+            if(i[Lang] == 1 && i.isRight == 1 && i.isSmall == 1) {
               svg = i;
             }
           });
