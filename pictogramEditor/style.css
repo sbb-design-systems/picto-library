@@ -255,3 +255,30 @@ h1 {
   height: 40px;
   background-color: #eb0000;
 }
+#notificationCanvas {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  width: auto;
+  overflow: hidden;
+  height: auto;
+  z-index: 1000;
+}
+p.notifier {
+  width: 200px;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-family: "SBBWeb Thin";
+}
+p.success {
+  border: solid 1px;
+  border-color: #00973B;
+  background-color: #ffffff;
+  color: #00973B;
+}
+p.error{
+  background-color: #EB0000;
+  color: #FFFFFF;
+}

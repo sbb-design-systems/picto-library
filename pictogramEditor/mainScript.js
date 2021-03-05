@@ -173,27 +173,38 @@ var exports = { //export elements will be used for csv export.
 var contentCanvas = document.getElementById("contentCanvas"); //initializing the content canvas where the lists will be rendered
 
 //set the event handlers for all the buttens for import, load or export
-document.getElementById("loadJsonButton").addEventListener("change", loadJsonFile, false);
-document.getElementById("loadJsonButtonTrigger").addEventListener("click", function() {document.getElementById("loadJsonButton").click();}, false);
 document.getElementById("loadSvgProductiveFolder").addEventListener("change", function (input) {loadSVG(input, "svgProduktion"); }, false);
 document.getElementById("loadSvgProductiveFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgProductiveFolder").click();}, false);
 document.getElementById("loadSvgDigitalFolder").addEventListener("change", function (input) {loadSVG(input, "svgDigital"); }, false);
 document.getElementById("loadSvgDigitalFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgDigitalFolder").click();}, false);
-document.getElementById("saveFileButton").addEventListener("click", function () {saveFile(JSON.stringify(lib), "Piktogramm-Bibliothek.json");}, false);
 document.getElementById("exportDesignSystems").addEventListener("click", function() {exportDesignSystems(exports.designsystem, "pikto.csv", ["svgPictos", "svgTrack", "svgSector", "svgStand"], ["picto", "addon"]);}, false);
 document.getElementById("exportSvgEditor").addEventListener("click", function() {exportSVGEditor(exports.svgDatabase, "PICTO_SVGS.csv", "pictos", ["picto"]);}, false);
 document.getElementById("exportPictosEditor").addEventListener("click", function() {exportPictosEditor(exports.pictoDatabase, "PICTOS.csv", ["pictos"], ["picto", "generated"]);}, false);
-document.getElementById("redrawCanvas").addEventListener("click", function() {buildViewPort();}, false);
+document.getElementById("redrawCanvas").addEventListener("click", function() {loadJsonFile();}, false);
+loadJsonFile();
 
 function loadJsonFile() { //Load the initial json library from the file system
-  var jsonFile = this.files[0];
-  const reader = new FileReader;
-  reader.addEventListener('load', (event) => {
-    lib = JSON.parse(event.target.result);
-    document.getElementById("loadJsonButton").style.display = "none";
-    buildViewPort();
-  });
-  reader.readAsText(jsonFile);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      lib = JSON.parse(xhttp.responseText);
+      buildViewPort();
+    }
+  };
+  xhttp.open("GET", "pictoLibrary.json", true);
+  xhttp.send();
+}
+
+function sendLibrary() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if(this.readyState == 4 && this.status == 200) {
+      var message = JSON.parse(xhttp.responseText);
+      notification(message.text, message.type);
+    }
+  }
+  xhttp.open("POST", "updateLibrary", true);
+  xhttp.send(JSON.stringify(lib));
 }
 
 function buildViewPort() { //Sort library and generate the list containers with headers and "add" button in the DOM
@@ -352,9 +363,11 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     });
     if(index != "new") {
       lib[this.getAttribute("data-id")].content[this.getAttribute("data-index")] = element;
+      sendLibrary();
     }
     else {
       lib[dataSet].content.push(element);
+      sendLibrary();
     }
     var container = document.getElementById(this.getAttribute("container-id"));
     container.getElementsByTagName("TABLE")[0].remove();
@@ -708,6 +721,29 @@ function find(list, attribute, value) { //search in the library in a given list 
     }
   });
   return result;
+}
+
+function notification(text, type) {
+  var notifier = document.createElement("p");
+  notifier.classList.add("notifier");
+  switch (type) {
+    case "success":
+      notifier.classList.add("success");
+      break;
+    case "error":
+      notifier.classList.add("error");
+      break;
+    default:
+
+  }
+  notifier.addEventListener("click", function(e) {
+    notifier.remove();
+  });
+  document.getElementById("notificationCanvas").appendChild(notifier);
+  notifier.innerHTML = text;
+  setTimeout(function() {
+    notifier.remove();
+  }, 5000);
 }
 
 function cleanBoolean (list) {
