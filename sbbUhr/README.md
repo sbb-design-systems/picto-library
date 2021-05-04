@@ -2,6 +2,7 @@
 A java script version of the famous SBB Clock for digital usage. 
 ## Initialisation
 In your html header add `<script src="path/to/sbbUhr-1.3.js"></script>`
+
 In the html body define a `<div></div>` Tag with a unique id where the clock will be hosted. 
 
 In a seperate script create a new clock `var myClock = new sbbUhr(container, background, fps);`
