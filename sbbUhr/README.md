@@ -42,7 +42,7 @@ Die SBB Uhr gibt die Systemzeit des Ausgabegerätes in analoger Form aus. Es ist
 
 ## Ausprägungen und Zustände
 Die Komponente hat folgende Ausprägungen: 
-![Bild SBB Uhr Ausprägungen](https://github.com/GoetteSebastian/sbbUhr/blob/main/SBB-Uhr.jpg "Bild SBB Uhr Ausprägungen")
+![Bild SBB Uhr Ausprägungen](https://github.com/sbb-design-systems/picto-library/raw/master/sbbUhr/SBB-Uhr.jpg "Bild SBB Uhr Ausprägungen")
 
 - Uhr auf hellem Hintergrund
 - Uhr auf dunklem Hintergrund
