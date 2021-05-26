@@ -65,7 +65,7 @@ All the objects are build in the same stucture:
 
     * `link` links to the `id` of the defined list. 
 
-    * `boolean` is stored as 1 and 0. 
+    * `boolean` is stored as `true` and `false`. 
 
     The linking works as in the following example: 
 
