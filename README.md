@@ -78,4 +78,4 @@ All the objects are build in the same stucture:
 Some pictograms exist in different languages or / and different directions. Every moving object is drawn in both directions `moving left` and `moving right`. 
 Usually the `moving right` version must be used. 
 Picotgrams containing text elements are available in the languages `german`, `french` and `italian`. In the future we will also provide `english` versions.
-The language and direction informations are storied in the `svg...` lists with the attributes `isDe`, `isFr`, `isIt`, `isEn`, `isLeft`, `isRight`. 
+The language and direction informations are stored in the `svg...` lists with the attributes `isDe`, `isFr`, `isIt`, `isEn`, `isLeft`, `isRight`. 
