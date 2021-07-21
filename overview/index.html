@@ -17,13 +17,20 @@
         -webkit-font-smoothing: antialiased;
 
       }
-      body {
+      #container {
         background-color: rgb(45,50,125);
         padding: 10mm 10mm 10mm 20mm;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        flex-direction: row;
+        margin: 0px;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
       }
       .category {
         width: 100mm;
-        display: inline-block;
         float: left;
         margin-right: 40mm;
       }
@@ -50,11 +57,15 @@
   </head>
   <body>
     <input type="file" name="loadJsonButton" id="loadJsonButton" value="x" accept=".json" />
+    <div id="container">
+
+    </div>
     <script type="text/javascript">
       var Lang = "isDe";
       var TitleLang = "name_de";
       var url = new URL(window.location.href);
       var lang = url.searchParams.get("lang");
+      var container = document.getElementById("container");
       switch(lang) {
         case "de":
           Lang = "isDe";
@@ -133,7 +144,7 @@
           if(index == 0 || item.picto.category != list[index -1].picto.category) {
             catContainer = document.createElement("DIV");
             catContainer.classList.add("category");
-            document.body.appendChild(catContainer);
+            container.appendChild(catContainer);
             var catTitle = document.createElement("H1");
             catTitle.innerHTML = item.picto.category + ". " + find("category", "id", item.picto.category)[0][TitleLang] + ". ";
             catContainer.appendChild(catTitle);
