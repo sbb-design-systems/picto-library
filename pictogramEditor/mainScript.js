@@ -173,14 +173,15 @@ var exports = { //export elements will be used for csv export.
 var contentCanvas = document.getElementById("contentCanvas"); //initializing the content canvas where the lists will be rendered
 
 //set the event handlers for all the buttens for import, load or export
-document.getElementById("loadSvgProductiveFolder").addEventListener("change", function (input) {loadSVG(input, "svgProduktion"); }, false);
-document.getElementById("loadSvgProductiveFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgProductiveFolder").click();}, false);
-document.getElementById("loadSvgDigitalFolder").addEventListener("change", function (input) {loadSVG(input, "svgDigital"); }, false);
-document.getElementById("loadSvgDigitalFolderTrigger").addEventListener("click", function() {document.getElementById("loadSvgDigitalFolder").click();}, false);
-document.getElementById("exportDesignSystems").addEventListener("click", function() {exportDesignSystems(exports.designsystem, "pikto.csv", ["svgPictos", "svgTrack", "svgSector", "svgStand"], ["picto", "addon"]);}, false);
-document.getElementById("exportSvgEditor").addEventListener("click", function() {exportSVGEditor(exports.svgDatabase, "PICTO_SVGS.csv", "pictos", ["picto"]);}, false);
-document.getElementById("exportPictosEditor").addEventListener("click", function() {exportPictosEditor(exports.pictoDatabase, "PICTOS.csv", ["pictos"], ["picto", "generated"]);}, false);
-document.getElementById("redrawCanvas").addEventListener("click", function() {loadJsonFile();}, false);
+document.getElementById("loadSvgProductiveFolder").addEventListener("change", (input) => {loadSVG(input, "svgProduktion"); }, false);
+document.getElementById("loadSvgProductiveFolderTrigger").addEventListener("click", () => {document.getElementById("loadSvgProductiveFolder").click();}, false);
+document.getElementById("loadSvgDigitalFolder").addEventListener("change", (input) => {loadSVG(input, "svgDigital"); }, false);
+document.getElementById("loadSvgDigitalFolderTrigger").addEventListener("click", () => {document.getElementById("loadSvgDigitalFolder").click();}, false);
+document.getElementById("exportDesignSystems").addEventListener("click", () => {exportDesignSystems(exports.designsystem, "pikto.csv", ["svgPictos", "svgTrack", "svgSector", "svgStand"], ["picto", "addon"]);}, false);
+document.getElementById("exportSvgEditor").addEventListener("click", () => {exportSVGEditor(exports.svgDatabase, "PICTO_SVGS.csv", "pictos", ["picto"]);}, false);
+document.getElementById("exportPictosEditor").addEventListener("click", () => {exportPictosEditor(exports.pictoDatabase, "PICTOS.csv", ["pictos"], ["picto", "generated"]);}, false);
+document.getElementById("redrawCanvas").addEventListener("click", () => {loadJsonFile();}, false);
+document.getElementById("createNewList").addEventListener("click", () => {newTableDialog();}, false);
 loadJsonFile();
 
 function loadJsonFile() { //Load the initial json library from the file system
@@ -209,18 +210,6 @@ function sendLibrary() {
 
 function buildViewPort() { //Sort library and generate the list containers with headers and "add" button in the DOM
   sort();
-  /*cleanBoolean("background");
-  cleanBoolean("category");
-  cleanBoolean("pictos");
-  cleanBoolean("plateType");
-  cleanBoolean("sector");
-  cleanBoolean("stand");
-  cleanBoolean("subcategory");
-  cleanBoolean("svgPictos");
-  cleanBoolean("svgSector");
-  cleanBoolean("svgStand");
-  cleanBoolean("svgTrack");
-  cleanBoolean("track");*/
 
   contentCanvas.innerHTML = "";
   var tables = Object.entries(lib);
@@ -231,7 +220,9 @@ function buildViewPort() { //Sort library and generate the list containers with 
     var title = document.createElement("H1");
     title.innerHTML = item[1].name;
     var addButton = document.createElement("BUTTON");
-    addButton.innerHTML = "+";
+    addButton.innerHTML = "Element hinzufügen";
+    addButton.classList.add("right");
+    addButton.classList.add("red");
     addButton.setAttribute("dom-id", item[1].id);
     addButton.setAttribute("data-id", item[0]);
     addButton.onclick = function() {
@@ -305,21 +296,15 @@ function loadSVG(input, dataKey) { //load choosen svg files, read them and write
 }
 
 function setEntry(dataSet, index) { //build the edit, delete, save functions and edit overlays on doubleclick.
+  var editCanvas = document.createElement("DIV");
+  editCanvas.id = "editCanvas";
+  document.body.appendChild(editCanvas);
+
   var editFrame = document.createElement("DIV");
   editFrame.classList.add("editFrame");
   editFrame.setAttribute("id", "editFrame");
-  editFrame.addEventListener("click", function() {document.getElementById("editFrame").remove();}, false);
-  document.body.appendChild(editFrame);
-
-  var editHeader = document.createElement("DIV");
-  editHeader.classList.add("editHeader");
-  editHeader.innerHTML = "<span class'closeButton'>x</span>";
-  editFrame.appendChild(editHeader);
-
-  var closeIcon = document.createElement("SPAN");
-  closeIcon.innerHTML = "x";
-  closeIcon.classList.add("closeButton");
-  closeIcon.addEventListener("click", function(e) {document.getElementById("editFrame").remove(); e.stopPropagation();}, false);
+  //editFrame.addEventListener("click", function() {document.getElementById("editFrame").remove();}, false);
+  editCanvas.appendChild(editFrame);
 
   var editContainer = document.createElement("DIV");
   editContainer.classList.add("editContainer");
@@ -332,6 +317,21 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
   var editFooter = document.createElement("DIV");
   editFooter.classList.add("editFooter");
   editFrame.appendChild(editFooter);
+
+  var deleteButton = document.createElement("BUTTON");
+  deleteButton.innerHTML = "Löschen";
+  deleteButton.setAttribute("data-id", dataSet);
+  deleteButton.setAttribute("data-index", index);
+  deleteButton.setAttribute("container-id", lib[dataSet].id);
+  deleteButton.addEventListener("click", function(e) {
+    e.stopPropagation();
+    lib[this.getAttribute("data-id")].content.splice(this.getAttribute("data-index"), 1);
+    var container = document.getElementById(this.getAttribute("container-id"));
+    container.getElementsByTagName("TABLE")[0].remove();
+    jsonToTable(container, this.getAttribute("data-id"));
+    document.getElementById("editCanvas").remove();
+  }, false);
+  editFooter.appendChild(deleteButton);
 
   var saveButton = document.createElement("BUTTON");
   saveButton.innerHTML = "Speichern";
@@ -372,34 +372,14 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     var container = document.getElementById(this.getAttribute("container-id"));
     container.getElementsByTagName("TABLE")[0].remove();
     jsonToTable(container, this.getAttribute("data-id"));
-    document.getElementById("editFrame").remove();
+    document.getElementById("editCanvas").remove();
   }, false);
   editFooter.appendChild(saveButton);
 
   var abortButton = document.createElement("BUTTON");
   abortButton.innerHTML = "Abbrechen";
-  abortButton.addEventListener("click", function(e) {document.getElementById("editFrame").remove(); e.stopPropagation();}, false);
+  abortButton.addEventListener("click", function(e) {document.getElementById("editCanvas").remove(); e.stopPropagation();}, false);
   editFooter.appendChild(abortButton);
-
-  var deleteButton = document.createElement("BUTTON");
-  deleteButton.classList.add("right");
-  deleteButton.innerHTML = "Löschen";
-  deleteButton.setAttribute("data-id", dataSet);
-  deleteButton.setAttribute("data-index", index);
-  deleteButton.setAttribute("container-id", lib[dataSet].id);
-  deleteButton.addEventListener("click", function(e) {
-    e.stopPropagation();
-    lib[this.getAttribute("data-id")].content.splice(this.getAttribute("data-index"), 1);
-    var container = document.getElementById(this.getAttribute("container-id"));
-    container.getElementsByTagName("TABLE")[0].remove();
-    jsonToTable(container, this.getAttribute("data-id"));
-    document.getElementById("editFrame").remove();
-  }, false);
-  editFooter.appendChild(deleteButton);
-
-  var editContent = document.createElement("DIV");
-  editContent.setAttribute("id", "editContent");
-  editContainer.appendChild(editContent);
 
   var dataPrototype = lib[dataSet].prototype;
   dataPrototype.forEach((item, i) => {
@@ -407,6 +387,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     inputWrapper.classList.add("inputWrapper");
     var label = document.createElement("LABEL");
     label.innerHTML = item.name;
+    label.setAttribute("for", "dataid" + item.key);
     inputWrapper.appendChild(label);
     if(item.type == "text" || item.type == "number") {
       var input = document.createElement("INPUT");
@@ -418,6 +399,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     else if(item.type == "boolean") {
       var input = document.createElement("INPUT");
       input.type = "checkbox";
+      inputWrapper.classList.add("checkboxWrapper");
       if(index != "new") input.checked = lib[dataSet].content[index][item.key];
     }
     else if(item.type == "link") {
@@ -496,7 +478,7 @@ function setEntry(dataSet, index) { //build the edit, delete, save functions and
     input.id = "dataid" + item.key;
     input.classList.add("dataItem");
     inputWrapper.appendChild(input);
-    editContent.appendChild(inputWrapper);
+    editContainer.appendChild(inputWrapper);
   });
 }
 
@@ -721,6 +703,238 @@ function find(list, attribute, value) { //search in the library in a given list 
     }
   });
   return result;
+}
+
+function newTableDialog() {
+  var editCanvas = document.createElement("DIV");
+  editCanvas.id = "editCanvas";
+  document.body.appendChild(editCanvas);
+
+  var editFrame = document.createElement("DIV");
+  editFrame.classList.add("editFrame");
+  editFrame.setAttribute("id", "editFrame");
+  editCanvas.appendChild(editFrame);
+
+  var newEntryButton = document.createElement("BUTTON");
+  newEntryButton.innerHTML = "Neues Feld erstellen";
+  newEntryButton.addEventListener("click", (e) => {
+    var prototypeWrapper = document.createElement("DIV");
+    prototypeWrapper.classList.add("prototypeWrapper");
+
+    var typeWrapper = document.createElement("DIV");
+    typeWrapper.classList.add("inputWrapper");
+    prototypeWrapper.appendChild(typeWrapper);
+
+    var typeLabel = document.createElement("LABEL");
+    typeLabel.setAttribute("for", "dataidtype");
+    typeLabel.innerHTML = "Feld Typ";
+    typeWrapper.appendChild(typeLabel);
+
+    var type = document.createElement("SELECT");
+    type.id = "dataidtype";
+    type.classList.add("dataItem");
+    type.classList.add("dataidtype");
+    type.setAttribute("data-id", "type");
+
+    var types = [
+      {
+        value: "text",
+        name: "Text"
+      },
+      {
+        value: "number",
+        name: "Nummer"
+      },
+      {
+        value: "link",
+        name: "Verknüpfung"
+      },
+      {
+        value: "boolean",
+        name: "Checkbox"
+      },
+      {
+        value: "multiLink",
+        name: "Verknüpfung Multi Select"
+      },
+      {
+        value: "svg",
+        name: "SVG Grafik"
+      }
+    ];
+
+    types.forEach((item) => {
+      var option = document.createElement("OPTION");
+      option.value = item.value;
+      option.innerHTML = item.name;
+      type.appendChild(option);
+    });
+
+    type.addEventListener("change", (e) => {
+      if(type.value == "link" || type.value == "multiLink") {
+        relWrapper.classList.remove("hidden");
+        keyWrapper.classList.add("hidden");
+        nameWrapper.getElementsByTagName("INPUT")[0].disabled = true;
+        linkWrapper.classList.remove("hidden");
+        nameWrapper.getElementsByTagName("input")[0].value = lib[linkSelect.value].name;
+        relSelect.innerHTML = "";
+        lib[linkSelect.value].prototype.forEach((entry) => {
+          var option = document.createElement("OPTION");
+          option.innerHTML = entry.name;
+          option.value = entry.key;
+          relSelect.appendChild(option);
+        });
+      }
+      else {
+        relWrapper.classList.add("hidden");
+        keyWrapper.classList.remove("hidden");
+        nameWrapper.getElementsByTagName("INPUT")[0].disabled = false;
+        linkWrapper.classList.add("hidden");
+        nameWrapper.getElementsByTagName("input")[0].value = "";
+      }
+    });
+
+    typeWrapper.appendChild(type);
+
+    var keyWrapper = createInputWrapper("key", "Feld Schlüssel", "text");
+    prototypeWrapper.appendChild(keyWrapper);
+
+    var linkWrapper = document.createElement("DIV");
+    linkWrapper.classList.add("inputWrapper");
+    linkWrapper.classList.add("hidden");
+
+    var linkLabel = document.createElement("LABEL");
+    linkLabel.innerHTML = "Verknüpfte Liste";
+    linkLabel.setAttribute("for", "dataidlink");
+    linkWrapper.appendChild(linkLabel);
+
+    var linkSelect = document.createElement("SELECT");
+    linkSelect.id = "dataidlink";
+    linkSelect.classList.add("dataItem");
+    linkSelect.classList.add("dataidlink");
+    linkSelect.setAttribute("data-id", "link");
+    linkSelect.addEventListener("change", (e) => {
+      nameWrapper.getElementsByTagName("input")[0].value = lib[linkSelect.value].name;
+      relSelect.innerHTML = "";
+      lib[linkSelect.value].prototype.forEach((entry) => {
+        var option = document.createElement("OPTION");
+        option.innerHTML = entry.name;
+        option.value = entry.key;
+        relSelect.appendChild(option);
+      });
+    });
+    linkWrapper.appendChild(linkSelect);
+
+    var lists = Object.keys(lib);
+
+    lists.forEach((list) => {
+      var option = document.createElement("OPTION");
+      option.value = list;
+      option.innerHTML = lib[list].name;
+      linkSelect.appendChild(option);
+    });
+
+    prototypeWrapper.appendChild(linkWrapper);
+
+    var nameWrapper = createInputWrapper("name", "Anzeigename", "text");
+    prototypeWrapper.appendChild(nameWrapper);
+
+    var relWrapper = document.createElement("DIV");
+    relWrapper.classList.add("inputWrapper");
+
+    var relLabel = document.createElement("LABEL");
+    relLabel.setAttribute("for", "dataodrel");
+    relLabel.innerHTML = "Anzeigewert";
+    relWrapper.classList.add("hidden");
+    relWrapper.appendChild(relLabel);
+
+    var relSelect = document.createElement("SELECT");
+    relSelect.id = "dataidrel";
+    relSelect.classList.add("dataItem");
+    relSelect.classList.add("dataidrel");
+    relSelect.setAttribute("data-id", "rel");
+
+    relWrapper.appendChild(relSelect);
+    prototypeWrapper.appendChild(relWrapper);
+
+    editContainer.appendChild(prototypeWrapper);
+  }, false);
+  editFrame.appendChild(newEntryButton);
+
+  var editContainer = document.createElement("DIV");
+  editContainer.classList.add("editContainer");
+  editContainer.setAttribute("id", "editContainer");
+  editContainer.addEventListener("click", function(e) {e.stopPropagation();}, false);
+  editFrame.appendChild(editContainer);
+
+  editContainer.appendChild(createInputWrapper("listId", "Tabellen Id", "text"));
+  editContainer.appendChild(createInputWrapper("listName", "Tabellen Name", "text"));
+
+  var editFooter = document.createElement("DIV");
+  editFooter.classList.add("editFooter");
+  editFrame.appendChild(editFooter);
+
+  var saveButton = document.createElement("BUTTON");
+  saveButton.innerHTML = "Speichern";
+  saveButton.classList.add("red");
+  saveButton.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var newList = {
+      content: [],
+      id: document.getElementById("dataidlistId").value + "Container",
+      name: document.getElementById("dataidlistName").value,
+      prototype: [],
+      sort: []
+    };
+    var prototypeFields = document.getElementsByClassName("prototypeWrapper");
+    for (let item of prototypeFields) {
+      var proto = {
+        key: "",
+        name: "",
+        rel: "",
+        type: item.getElementsByClassName("dataidtype")[0].value
+      };
+      if(proto.type == "link" || proto.type == "multiLink") {
+        proto.key = item.getElementsByClassName("dataidlink")[0].value;
+        proto.name = lib[proto.key].name;
+        proto.rel = item.getElementsByClassName("dataidrel")[0].value;
+      }
+      else {
+        proto.key = item.getElementsByClassName("dataidkey")[0].value;
+        proto.name = item.getElementsByClassName("dataidname")[0].value;
+      }
+      newList.prototype.push(proto);
+    };
+    lib[document.getElementById("dataidlistId").value] = newList;
+    document.getElementById("editCanvas").remove();
+    sendLibrary();
+    buildViewPort();
+  }, false);
+  editFooter.appendChild(saveButton);
+
+  var abortButton = document.createElement("BUTTON");
+  abortButton.innerHTML = "Abbrechen";
+  abortButton.addEventListener("click", function(e) {document.getElementById("editCanvas").remove(); e.stopPropagation();}, false);
+  editFooter.appendChild(abortButton);
+}
+
+function createInputWrapper(id, name, type) {
+  var wrapper = document.createElement("DIV");
+  wrapper.classList.add("inputWrapper");
+  wrapper.classList.add(id + "Wrapper");
+  var label = document.createElement("LABEL");
+  label.innerHTML = name;
+  label.setAttribute("for", "dataid" + id);
+  wrapper.appendChild(label);
+  var input = document.createElement("INPUT");
+  input.type = type;
+  input.setAttribute("data-id", id);
+  input.id = "dataid" + id;
+  input.classList.add("dataItem");
+  input.classList.add("dataid" + id);
+  wrapper.appendChild(input);
+  return wrapper;
+
 }
 
 function notification(text, type) {

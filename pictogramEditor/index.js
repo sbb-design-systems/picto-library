@@ -13,7 +13,12 @@ http.createServer(function (req, res) {
       writeLibrary(req, res);
       break;
     default:
+    if(req.url.includes("?")) {
       sendFile(res, __dirname + req.url.substring(0, req.url.lastIndexOf("?")));
+    }
+    else {
+      sendFile(res, __dirname + req.url);
+    }
   }
 }).listen(3000);
 
