@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
+<rect id="background-blue" fill="#2D327D" width="400" height="400"/>
+<g id="content">
+	<path id="frameWhite" fill="#FFFFFF" d="M340,40c11,0,20,9,20,20v280c0,11-9,20-20,20H60c-11,0-20-9-20-20V60c0-11,9-20,20-20H340
+		 M340,35H60c-13.785,0-25,11.215-25,25v280c0,13.785,11.215,25,25,25h280c13.785,0,25-11.215,25-25V60
+		C365,46.215,353.785,35,340,35L340,35z"/>
+	<polygon fill="#FFFFFF" points="304,228 304,268 96,268 96,228 80,228 80,320 96,320 96,288 304,288 304,320 320,320 320,228 	"/>
+	<path fill="#FFFFFF" d="M292,260H180c-2.209,0-4-1.791-4-4v-12c0-8.837,7.163-16,16-16h100c2.209,0,4,1.791,4,4v24
+		C296,258.209,294.209,260,292,260z"/>
+	<path fill="#FFFFFF" d="M164,260h-56c-2.209,0-4-1.791-4-4v-24c0-2.209,1.791-4,4-4h44c8.837,0,16,7.163,16,16v12
+		C168,258.209,166.209,260,164,260z"/>
+</g>
+</svg>
