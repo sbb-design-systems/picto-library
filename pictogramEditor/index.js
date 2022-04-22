@@ -20,7 +20,7 @@ http.createServer(function (req, res) {
       sendFile(res, __dirname + req.url);
     }
   }
-}).listen(3000);
+}).listen(3001);
 
 function sendFile(res, url) {
   fs.readFile(url, function (err,data) {
