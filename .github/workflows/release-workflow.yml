@@ -26,7 +26,7 @@ jobs:
       run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
     - name: Prepare icons
       run: node ../.github/prepare-icons.js
-      working-directory: ${{ env.S3_DIR }}/picto
+      working-directory: ${{ env.S3_DIR }}
       env:
         CDN_VERSION: ${{ steps.tag_step.outputs.tag }}
     - name: Print directories
