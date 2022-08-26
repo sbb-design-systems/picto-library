@@ -1,0 +1,43 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'
+
+jobs:
+  aws-s3-upload:
+    runs-on: ubuntu-latest
+    env:
+      S3_DIR: s3-icons
+      AWS_REGION: eu-central-1
+      S3BUCKET: cloudfront-icon-cdn-backend-esta-web-prod
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 14
+    - name: Create s3 upload directory
+      run: mkdir $S3_DIR
+    - name: Copy fpl icons
+      run: cp -R ./pictos/svg-digital/ ./$S3_DIR/picto
+    - name: Set output
+      id: tag_step
+      run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
+    - name: Prepare icons
+      run: node ../.github/prepare-icons.js
+      working-directory: ${{ env.S3_DIR }}
+      env:
+        CDN_VERSION: ${{ steps.tag_step.outputs.tag }}
+    - name: Print directories
+      run: ls -Rll
+      working-directory: ${{ env.S3_DIR }}
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.ICON_CDN_AWS_ACCESS_ID }}
+        aws-secret-access-key: ${{ secrets.ICON_CDN_AWS_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+    - name: Upload icons and indexes to s3
+      run: aws s3 cp . s3://${{ env.S3BUCKET }} --recursive --include "*.svg" --include index.json
+      working-directory: ${{ env.S3_DIR }}
