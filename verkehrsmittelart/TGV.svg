@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.0" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<rect id="background-red" fill="#EB0000" width="210" height="71"/>
-<g id="TGV:background-red">
+<g id="tgv">
+	<rect id="background-red_00000171686054443947517830000017051324531342451341_" fill="#EB0000" width="210" height="71"/>
 	<polygon fill="#FFFFFF" points="10.905,8.917 51.862,8.917 50.063,17.232 35.141,17.232 25.51,61.917 14.397,61.917 24.028,17.232 
 		9,17.232 	"/>
 	<path fill="#FFFFFF" d="M96.312,20.138c-1.164-0.701-2.117-1.202-2.963-1.603c-0.847-0.401-2.222-0.902-4.127-1.403
