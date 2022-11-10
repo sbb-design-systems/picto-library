@@ -26,7 +26,7 @@ All the files are in the PNG format and exportet in the RGB color space.
 The SVG files are available with a nominal size of 24 x 24 px but are set up to be scaled to any size. They are exported in the RGB color space. 
 ### [PDF](https://github.com/sbb-design-systems/picto-library/tree/master/pictos/pdf-digital)
 The PDF files are available with a nominal size of 24 x 24 px or 8.5 x 8.5 mm and can be scaled to any size. They are exported in the RGB color space. 
-## [pictoLibrary.json](https://github.com/sbb-design-systems/picto-library/blob/master/pictoLibrary.json)
+## [pictoLibrary.json - Documentation not up to date](https://github.com/sbb-design-systems/picto-library/blob/master/pictoLibrary.json)
 All the meta informations about the pictograms as well as the svg data of the graphics are also available as a json structure. The file is structured as described here: 
 
 `pictos` `track` `sector` `stand` Those objects contain the meta data of the pictograms itself. 
