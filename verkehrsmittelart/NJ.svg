@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.0" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g id="nj">
-	<rect id="background-red_00000109733596378498562730000005238770288828169622_" fill="#EB0000" width="210" height="71"/>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
+<g>
+	<rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect>
 	<path fill="#FFFFFF" d="M51.171,62.095H40.973l-14.34-35.698l-7.436,35.698H9L20.047,9h10.197l14.446,35.497L52.127,9h10.197
-		L51.171,62.095z"/>
+		L51.171,62.095z" class="sbb-vm-color-white"></path>
 	<path fill="#FFFFFF" d="M93.129,9h10.729l-6.692,32.179c-1.806,8.547-4.143,14.279-7.011,17.296C87.287,61.492,82.826,63,76.771,63
 		c-5.099,0-8.923-1.207-11.472-3.52c-2.549-2.313-3.824-5.531-3.824-9.553c0-0.804,0.106-1.81,0.212-2.816l10.091-1.106
 		c-0.106,1.106-0.212,1.911-0.212,2.615c0,1.709,0.531,3.017,1.487,3.922c0.956,0.905,2.443,1.307,4.461,1.307
-		c2.762,0,4.78-0.804,5.949-2.514c0.85-1.207,1.912-4.827,3.08-10.659L93.129,9z"/>
+		c2.762,0,4.78-0.804,5.949-2.514c0.85-1.207,1.912-4.827,3.08-10.659L93.129,9z" class="sbb-vm-color-white"></path>
 </g>
 </svg>

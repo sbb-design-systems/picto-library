@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.0" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g id="white">
-	<rect id="background-white_00000147201839684919677670000006641991587696569237_" fill="#FFFFFF" width="210" height="71"/>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
+<g>
+	<rect fill="#FFFFFF" width="210" height="71" class="sbb-vm-color-white"></rect>
 </g>
 <g>
 	<path d="M53.419,24.719H42.404c-0.217-2.584-1.178-4.559-2.88-5.924c-1.703-1.364-4.089-2.047-7.156-2.047
@@ -14,11 +12,11 @@
 		c2.898,0,5.193-0.567,6.884-1.703c1.908-1.304,2.862-3.079,2.862-5.325c0-2.247-1.341-3.889-4.021-4.928
 		c-1.474-0.58-4.952-1.631-10.435-3.152c-3.43-0.941-6.111-1.835-8.043-2.681c-1.933-0.846-3.478-1.788-4.638-2.826
 		c-2.705-2.415-4.058-5.749-4.058-10c0-5.096,2.113-9.13,6.34-12.101c3.6-2.536,8.272-3.804,14.021-3.804
-		c5.048,0,9.275,1.002,12.681,3.007C50.568,13.645,53.152,18.294,53.419,24.719z"/>
-	<path d="M99.758,52.218V62H62.295V9.031h11.558v43.187H99.758z"/>
+		c5.048,0,9.275,1.002,12.681,3.007C50.568,13.645,53.152,18.294,53.419,24.719z" class="sbb-vm-color-black"></path>
+	<path d="M99.758,52.218V62H62.295V9.031h11.558v43.187H99.758z" class="sbb-vm-color-black"></path>
 	<path d="M141.313,40.95v8.949h-6.666V62h-10.326V49.899h-22.101v-9.928l22.644-30.94h9.783V40.95H141.313z M124.539,41.059V21.35
-		l-13.623,19.709H124.539z"/>
+		l-13.623,19.709H124.539z" class="sbb-vm-color-black"></path>
 	<path d="M182.58,40.95v8.949h-6.666V62h-10.326V49.899h-22.101v-9.928l22.644-30.94h9.783V40.95H182.58z M165.806,41.059V21.35
-		l-13.623,19.709H165.806z"/>
+		l-13.623,19.709H165.806z" class="sbb-vm-color-black"></path>
 </g>
 </svg>

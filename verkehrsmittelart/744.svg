@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 27.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.0" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g id="white">
-	<rect id="background-white_00000147201839684919677670000006641991587696569237_" fill="#FFFFFF" width="210" height="71"/>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
+<g>
+	<rect fill="#FFFFFF" width="210" height="71" class="sbb-vm-color-white"></rect>
 </g>
 <g>
 	<path d="M47.404,9.031v8.985c-0.29,0.314-1.147,1.292-2.572,2.935c-1.98,2.271-3.949,5.127-5.905,8.569
 		c-1.957,3.442-3.479,6.745-4.565,9.909C32.066,46.022,30.678,53.547,30.195,62H19.253c0.073-3.985,0.767-8.405,2.084-13.26
-		c1.315-4.855,3.134-9.71,5.452-14.565c3.309-6.859,6.666-11.968,10.072-15.325H11.862V9.031H47.404z"/>
+		c1.315-4.855,3.134-9.71,5.452-14.565c3.309-6.859,6.666-11.968,10.072-15.325H11.862V9.031H47.404z" class="sbb-vm-color-black"></path>
 	<path d="M90.446,40.95v8.949H83.78V62H73.454V49.899H51.354v-9.928l22.644-30.94h9.783V40.95H90.446z M73.672,41.059V21.35
-		L60.049,41.059H73.672z"/>
+		L60.049,41.059H73.672z" class="sbb-vm-color-black"></path>
 	<path d="M131.713,40.95v8.949h-6.666V62h-10.326V49.899H92.62v-9.928l22.644-30.94h9.783V40.95H131.713z M114.938,41.059V21.35
-		l-13.623,19.709H114.938z"/>
+		l-13.623,19.709H114.938z" class="sbb-vm-color-black"></path>
 </g>
 </svg>
