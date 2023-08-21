@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g>
-	<rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect>
-	<path fill="#FFFFFF" d="M32.065,9H47.18L24.213,62H9L32.065,9z" class="sbb-vm-color-white"></path>
-	<path fill="#FFFFFF" d="M89.907,46.296c1.669,0,3.239-0.981,3.828-2.552L108.85,9H54.574L31.607,62h15.017l17.47-39.75h23.85
-		l-5.496,12.661H62.72L79.307,62h16.194L82.546,46.296H89.907z" class="sbb-vm-color-white"></path>
-</g>
-<g>
-	<path fill="#FFFFFF" d="M148.356,9.031V62h-10.579V27.328h-3.768h-3.769h-3.658h-1.269v-7.681c2.584-0.072,4.691-0.338,6.322-0.797
-		c1.63-0.458,3.121-1.208,4.475-2.247c1.956-1.497,3.272-4.021,3.949-7.572H148.356z" class="sbb-vm-color-white"></path>
-</g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?><svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve"> <g> <rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect> <path fill="#FFFFFF" d="M32.065,9H47.18L24.213,62H9L32.065,9z" class="sbb-vm-color-white"></path> <path fill="#FFFFFF" d="M89.907,46.296c1.669,0,3.239-0.981,3.828-2.552L108.85,9H54.574L31.607,62h15.017l17.47-39.75h23.85 l-5.496,12.661H62.72L79.307,62h16.194L82.546,46.296H89.907z" class="sbb-vm-color-white"></path> </g> <g> <path fill="#FFFFFF" d="M148.356,9.031V62h-10.579V27.328h-3.768h-3.769h-3.658h-1.269v-7.681c2.584-0.072,4.691-0.338,6.322-0.797 c1.63-0.458,3.121-1.208,4.475-2.247c1.956-1.497,3.272-4.021,3.949-7.572H148.356z" class="sbb-vm-color-white"></path> </g> </svg>

@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g>
-	<rect fill="#FFFFFF" width="210" height="71" class="sbb-vm-color-white"></rect>
-</g>
-<g>
-	<path d="M40.412,8.922L60.52,62H48.383L44.18,50.116H24.507L20.195,62H8.275L28.456,8.922H40.412z M41.354,41.639l-7.028-19.963
-		L27.26,41.639H41.354z" class="sbb-vm-color-black"></path>
-	<path d="M98.924,9.031v9.782H82.837V62H71.28V18.813H55.266V9.031H98.924z" class="sbb-vm-color-black"></path>
-	<path d="M145.771,9.031v8.804l-28.731,34.383h29.673V62h-44.817v-9.274l28.478-33.912h-26.521V9.031H145.771z" class="sbb-vm-color-black"></path>
-</g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?><svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve"> <g> <rect fill="#FFFFFF" width="210" height="71" class="sbb-vm-color-white"></rect> </g> <g> <path d="M40.412,8.922L60.52,62H48.383L44.18,50.116H24.507L20.195,62H8.275L28.456,8.922H40.412z M41.354,41.639l-7.028-19.963 L27.26,41.639H41.354z" class="sbb-vm-color-black"></path> <path d="M98.924,9.031v9.782H82.837V62H71.28V18.813H55.266V9.031H98.924z" class="sbb-vm-color-black"></path> <path d="M145.771,9.031v8.804l-28.731,34.383h29.673V62h-44.817v-9.274l28.478-33.912h-26.521V9.031H145.771z" class="sbb-vm-color-black"></path> </g> </svg>

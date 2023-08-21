@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g>
-	<rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect>
-	<path fill="#FFFFFF" d="M32.059,9H47.17L24.209,62H9L32.059,9z" class="sbb-vm-color-white"></path>
-	<path fill="#FFFFFF" d="M54.541,9H109l-6.182,14.33H63.765L52.971,47.67h39.053L86.039,62H31.58L54.541,9z" class="sbb-vm-color-white"></path>
-</g>
-<g>
-	<path fill="#FFFFFF" d="M157.958,9.031v8.985c-0.29,0.314-1.147,1.292-2.572,2.935c-1.98,2.271-3.949,5.127-5.905,8.569
-		c-1.957,3.442-3.479,6.745-4.565,9.909c-2.295,6.594-3.684,14.118-4.166,22.571h-10.942c0.073-3.985,0.767-8.405,2.084-13.26
-		c1.315-4.855,3.134-9.71,5.452-14.565c3.309-6.859,6.666-11.968,10.072-15.325h-24.999V9.031H157.958z" class="sbb-vm-color-white"></path>
-	<path fill="#FFFFFF" d="M201,40.95v8.949h-6.666V62h-10.326V49.899h-22.101v-9.928l22.644-30.94h9.783V40.95H201z M184.226,41.059
-		V21.35l-13.623,19.709H184.226z" class="sbb-vm-color-white"></path>
-</g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?><svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve"> <g> <rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect> <path fill="#FFFFFF" d="M32.059,9H47.17L24.209,62H9L32.059,9z" class="sbb-vm-color-white"></path> <path fill="#FFFFFF" d="M54.541,9H109l-6.182,14.33H63.765L52.971,47.67h39.053L86.039,62H31.58L54.541,9z" class="sbb-vm-color-white"></path> </g> <g> <path fill="#FFFFFF" d="M157.958,9.031v8.985c-0.29,0.314-1.147,1.292-2.572,2.935c-1.98,2.271-3.949,5.127-5.905,8.569 c-1.957,3.442-3.479,6.745-4.565,9.909c-2.295,6.594-3.684,14.118-4.166,22.571h-10.942c0.073-3.985,0.767-8.405,2.084-13.26 c1.315-4.855,3.134-9.71,5.452-14.565c3.309-6.859,6.666-11.968,10.072-15.325h-24.999V9.031H157.958z" class="sbb-vm-color-white"></path> <path fill="#FFFFFF" d="M201,40.95v8.949h-6.666V62h-10.326V49.899h-22.101v-9.928l22.644-30.94h9.783V40.95H201z M184.226,41.059 V21.35l-13.623,19.709H184.226z" class="sbb-vm-color-white"></path> </g> </svg>

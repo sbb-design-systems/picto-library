@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve">
-<g>
-	<rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect>
-	<path fill="#FFFFFF" d="M29.077,62h-1.82c-0.535,0-1.07,0-1.499,0c-0.428-0.203-0.749-0.304-0.963-0.304l-1.392-0.709l-1.713-1.52
-		L9.809,50.042l-2.034-1.621c-0.749-0.608-1.178-1.419-1.178-2.432c0-1.013,0.428-1.925,1.392-2.837l31.365-31.314l1.285-1.013
-		l1.07-0.811C42.672,9.405,43.85,9,45.456,9h57.592l-12.31,12.566H54.233l-8.029,8.107h36.503l-8.243,8.107h-36.61l-8.136,8.208
-		h36.289L50.059,62H29.077z" class="sbb-vm-color-white"></path>
-	<polygon fill="#FFFFFF" points="112.906,9 139.724,9 139.724,47.637 178.615,9 203.403,9 150.302,62 123.377,62 123.377,23.16 
-		84.486,62 59.805,62 	"></polygon>
-</g>
-</svg>
+<?xml version="1.0" encoding="utf-8"?><svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 210 71" enable-background="new 0 0 210 71" xml:space="preserve"> <g> <rect fill="#EB0000" width="210" height="71" class="sbb-vm-color-red"></rect> <path fill="#FFFFFF" d="M29.077,62h-1.82c-0.535,0-1.07,0-1.499,0c-0.428-0.203-0.749-0.304-0.963-0.304l-1.392-0.709l-1.713-1.52 L9.809,50.042l-2.034-1.621c-0.749-0.608-1.178-1.419-1.178-2.432c0-1.013,0.428-1.925,1.392-2.837l31.365-31.314l1.285-1.013 l1.07-0.811C42.672,9.405,43.85,9,45.456,9h57.592l-12.31,12.566H54.233l-8.029,8.107h36.503l-8.243,8.107h-36.61l-8.136,8.208 h36.289L50.059,62H29.077z" class="sbb-vm-color-white"></path> <polygon fill="#FFFFFF" points="112.906,9 139.724,9 139.724,47.637 178.615,9 203.403,9 150.302,62 123.377,62 123.377,23.16  84.486,62 59.805,62  " class="sbb-vm-color-white"></polygon> </g> </svg>
