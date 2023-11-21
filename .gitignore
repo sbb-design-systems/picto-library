@@ -5,3 +5,8 @@ s3-icons
 # Dependency directories
 node_modules/
 jspm_packages/
+
+libraryMigration.js
+migrateVerkehrsmittel.js
+package-lock.json
+package.json
